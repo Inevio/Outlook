@@ -1,0 +1,53 @@
+
+{
+
+    "welcomeTextLine1" : "Access your email directly from horbito.",
+    "welcomeTextLine2" : "You can attach and download files directly to your account without ever needing to download them.",
+    "loginOutlook"  : "Log in",
+    
+    "search" : "Buscar correo...",
+    "folders" : "Carpetas",
+    "accounts" : "Cuentas",
+    "send" : "Enviar",
+    "attach" : "Adjuntar",
+    "discard" : "Descartar",
+    "closeEmail" : "Cerrar correo",
+    "new" : "Nuevo",
+    "markAllRead" : "Marcar todo como leido",
+    "moveTo" : "Mover a",
+    "reply" : "Responder",
+    "replyAll" : "Responder a todos",
+    "forward" : "Reenviar",
+    "deleteMail" : "Eliminar correo",
+    "deleteMails" : "Eliminar correos",
+    "archive" : "Archivar",
+    "spam" : "Spam",
+    "markRead" : "Marcar como leido",
+    "markUnread" : "Marcar como no leido",
+    "undo" : "Deshacer",
+
+    "confirmDeleteAccount" : "¿Estás seguro de querer eliminar el correo",
+    "waitOnSend" : "Se debe esperar a que se adjunte el archivo",
+    "noDestinatary" : "No ha escrito ningún destinatario",
+    "noValidDestinatary" : "El correo destinatario no es válido",
+    "emailSentTitle" : "Correo enviado",
+    "emailSentText" : "Se ha enviado el email correctamente.",
+
+    "messageSent" : "Se ha enviado correctamente el correo",
+    "openAttach" : "Abrir",
+    "deattach" : "Desadjuntar",
+    "to" : "Para",
+    "subject" : "Escribe un asunto",
+    "addMessagePlaceholder" : "Escribe el mensaje",
+    "downloadPC" : "Descargar",
+    "downloadHorbito" : "Guardar en Horbito",
+    "uploadPC" : "Desde el ordenador",
+    "uploadHorbito" : "Desde Horbito",
+    "resultsSearch" : "Resultados de",
+    "draft" : "Borrador",
+    "drafts" : "Borradores",
+    "dropFiles" : "Suelta archivos aquí",
+    "confirmLinkAttachment" : "El límite del tamaño de un adjunto es de 4MB. ¿Quieres adjuntarlo como un enlace?",
+    "linkAttchment" : "Descarga el archivo adjunto en este enlace"
+
+}

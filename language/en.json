@@ -1,0 +1,53 @@
+
+{
+
+    "welcomeTextLine1" : "Access your email directly from horbito.",
+    "welcomeTextLine2" : "You can attach and download files directly to your account without ever needing to download them.",
+    "loginOutlook"  : "Log in",
+    
+    "search" : "Search mails...",
+    "folders" : "Folders",
+    "accounts" : "Accounts",
+    "send" : "Send",
+    "attach" : "Attach",
+    "discard" : "Discard",
+    "closeEmail" : "Close mail",
+    "new" : "New",
+    "markAllRead" : "Mark all as read",
+    "moveTo" : "Move to",
+    "reply" : "Reply",
+    "replyAll" : "Reply All",
+    "forward" : "Forward",
+    "deleteMail" : "Delete mail",
+    "deleteMails" : "Delete mails",
+    "archive" : "Archive",
+    "spam" : "Spam",
+    "markRead" : "Mark as Read",
+    "markUnread" : "Mark as Unread",
+    "undo" : "Undo",
+
+    "confirmDeleteAccount" : "Are you sure you want to delete the email",
+    "waitOnSend" : "You must wait for the attachment to be uploaded",
+    "noDestinatary" : "No destinatary introduced",
+    "noValidDestinatary" : "The destinatary email is not valid",
+    "emailSentTitle" : "Email sent",
+    "emailSentText" : "The email has been sent",
+
+    "messageSent" : "The email has been sent correctly",
+    "openAttach" : "Open",
+    "deattach" : "Deattach",
+    "to" : "To",
+    "subject" : "Add a subject",
+    "addMessagePlaceholder" : "Add a message",
+    "downloadPC" : "Download",
+    "downloadHorbito" : "Save in Horbito",
+    "uploadPC" : "From computer",
+    "uploadHorbito" : "From Horbito",
+    "resultsSearch" : "Results for",
+    "draft" : "Draft",
+    "drafts" : "Drafts",
+    "dropFiles" : "Drop files here",
+    "confirmLinkAttachment" : "There is a limit of 4MB to attach to an email. Do you want to insert a link to the file?",
+    "linkAttchment" : "Download the attached file in this link"
+
+}
