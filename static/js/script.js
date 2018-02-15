@@ -1780,6 +1780,10 @@ console.log(err)
 
             $('.ui-subheader-buttons-button.new').click();
 
+            if (email.hasAttachments) {
+                alert(lang.attachmentForwardAlert);
+            }
+            
             $('.ui-main-new-email input.subject').val('Fwd: '+email.subject);
             tinymce.activeEditor.setContent('<br><br><br>------------------------------------------------------------------------------------<br>'+email.body.content);
 

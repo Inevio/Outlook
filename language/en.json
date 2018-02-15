@@ -26,6 +26,7 @@
     "markUnread" : "Mark as Unread",
     "undo" : "Undo",
 
+    "attachmentForwardAlert" : "If you want to forward the attachment that this email had, download it and attach it here",
     "confirmDeleteAccount" : "Are you sure you want to delete the email",
     "waitOnSend" : "You must wait for the attachment to be uploaded",
     "noDestinatary" : "No destinatary introduced",
