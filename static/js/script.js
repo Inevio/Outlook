@@ -613,7 +613,7 @@ callback();
         $('.ui-main-email-list-inner').html('\
             <div class="messageLoadingEmails">\
                 <img src="https://static.inevio.com/app/521/img/waiting.png">\
-                <div class="text">Waiting for Microsoft</div>\
+                <div class="text">'+lang.waitingMessage+'</div>\
             </div>\
         ')
 
@@ -1038,6 +1038,18 @@ callback();
         });
     }
 
+
+    function filterSearchString(searchQuery) {
+        var finalSearchQuery = '';
+        var acceptableChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        for (var i = 0; i < searchQuery.length; i++) {
+        	if (acceptableChars.indexOf(searchQuery[i]) >= 0) {
+        		finalSearchQuery += searchQuery[i];
+        	}
+        }
+        return finalSearchQuery;
+    }
+
     
     // Actions to navigate that will never have to be recalled
     var lastEnteredFolderId = -1;
@@ -1074,7 +1086,9 @@ callback();
                     var idCurrentAccount = $('.ui-left-side-name').attr('idaccount');
                     getAccount({idAccount : idCurrentAccount, newName : newName}, function(account, jsonData) {
                         account.createFolder(jsonData.newName, function(error, data) {
-                            if (error) alert('Se ha producido un error. '+error)
+                            if (error) {
+                                alert('Se ha producido un error. '+error)
+                            }
 
                             var idHotmailAccount = $('.ui-left-side-name').attr('idaccount');
                             var hotmailAccount = getHotmailAccount(idHotmailAccount);
@@ -1125,6 +1139,7 @@ callback();
             e.preventDefault();
 
             var lookingFor = $(this).find('input').val();
+            lookingFor = filterSearchString(lookingFor)
             if (lookingFor.length > 0) {
 
     //            $('.ui-subheader-buttons-button.mark-read').hide();
@@ -1137,18 +1152,30 @@ callback();
 
                 loadViewEmailList();
                 $('.ui-main-email-list-inner').scrollTop(0);
-                $('.ui-main-email-list-inner').html('<section class="search">'+lang.resultsSearch+': <span>'+lookingFor+'</span></section>');
+                $('.ui-main-email-list-inner').html('<section class="search">'+lang.resultsSearch+': <span>'+lookingFor+'</span></section>\
+		            <div class="messageLoadingEmails">\
+		                <img src="https://static.inevio.com/app/521/img/waiting.png">\
+		                <div class="text">'+lang.waitingMessage+'</div>\
+		            </div>\
+		        ');
                 getAccount({idAccount : idCurrentAccount, idEmail : idEmail}, function(account, jsonData) {
-console.log(lastEnteredFolderId)
                     account.getMessagesInFolder(lastEnteredFolderId, params, function(err, mails) {
-console.log(err)
                         if (err) alert('Se ha producido un error. '+err)
                         searchResults = {
                             'emails' : mails
                         };
+                        $('.ui-main-email-list-inner .messageLoadingEmails').remove();
                         mails.value.forEach(function( mail ) {
                             $('.ui-main-email-list-inner').append(designMailMailsList(mail));
                         });
+                        if (mails.value.length == 0) {
+			                $('.ui-main-email-list-inner').html('\
+			                    <div class="emptyEmails">\
+			                        <img src="https://static.inevio.com/app/521/img/empty.png">\
+			                        <div class="text">'+lang.emptySearchResults+'</div>\
+			                    </div>\
+			                ');
+                        }
                         actionsInMailList();
                     });
                 });
@@ -1780,6 +1807,10 @@ console.log(err)
 
             $('.ui-subheader-buttons-button.new').click();
 
+            if (email.hasAttachments) {
+                alert(lang.attachmentForwardAlert);
+            }
+            
             $('.ui-main-new-email input.subject').val('Fwd: '+email.subject);
             tinymce.activeEditor.setContent('<br><br><br>------------------------------------------------------------------------------------<br>'+email.body.content);
 
@@ -2184,7 +2215,7 @@ console.log(err)
                 $('.ui-main-email-list-inner').html('\
                     <div class="emptyEmails">\
                         <img src="https://static.inevio.com/app/521/img/empty.png">\
-                        <div class="text">Esta carpeta está vacía.</div>\
+                        <div class="text">'+lang.emptyFolder+'</div>\
                     </div>\
                 ');
                 console.log('Unable to load folders');
@@ -2506,7 +2537,7 @@ console.log(err)
                     $('.ui-main-email-list-inner').append('\
                         <div class="emptyEmails">\
                             <img src="https://static.inevio.com/app/521/img/empty.png">\
-                            <div class="text">Esta carpeta está vacía.</div>\
+                            <div class="text">'+lang.emptyFolder+'</div>\
                         </div>\
                     ');
                 }
@@ -2540,7 +2571,7 @@ console.log(err)
                             $('.ui-main-email-list-inner').append('\
                                 <div class="emptyEmails">\
                                     <img src="https://static.inevio.com/app/521/img/empty.png">\
-                                    <div class="text">Esta carpeta está vacía.</div>\
+                                    <div class="text">'+lang.emptyFolder+'</div>\
                                 </div>\
                             ');
                         }
@@ -2571,8 +2602,25 @@ console.log(err)
 
     }
 
-    function markMailAsRead(idEmail) {
+    var markingAsRead = false;
+    function continueMarkingAsRead() {
+    	if (arrayToMarkAsReadMail.length > 0 && !markingAsRead) {
+    		markingAsRead = true;
+    		var idAccount = arrayToMarkAsReadMail[0].idAccount
+    		var idEmail = arrayToMarkAsReadMail[0].idEmail
+    		arrayToMarkAsReadMail.splice(0, 1);
+	        getAccount({idAccount : idAccount, idEmail : idEmail}, function(account, jsonData) {
+	            account.updateMessage(jsonData.idEmail, {id: jsonData.idEmail, isRead: "true"}, function(err, sdaf) {
+    				markingAsRead = false;
+	                if (err) alert('Se ha producido un error. '+err)
+	                continueMarkingAsRead();
+	            });
+	        });
+	    }
+    }
 
+    var arrayToMarkAsReadMail = [];
+    function markMailAsRead(idEmail) {
         if ($('.ui-main-email-list-inner .search').length == 0) {
             $('.ui-left-side-folders-entry.mark > .entry > .unread-messages').html(parseInt($('.ui-left-side-folders-entry.mark > .entry > .unread-messages').html())-1);
             if ($('.ui-left-side-folders-entry.mark').attr('knownname') == 'inbox') {
@@ -2583,12 +2631,11 @@ console.log(err)
             }
         }
         var idCurrentAccount = $('.ui-left-side-name').attr('idaccount');
-        getAccount({idAccount : idCurrentAccount, idEmail : idEmail}, function(account, jsonData) {
-            account.updateMessage(jsonData.idEmail, {id: jsonData.idEmail, isRead: "true"}, function(err, sdaf) {
-                if (err) alert('Se ha producido un error. '+err)
-            });
-        });
-        
+    	arrayToMarkAsReadMail.push({
+    		idEmail : idEmail,
+    		idAccount : idCurrentAccount
+    	});
+        continueMarkingAsRead();
     }
 
     function dayWeekToLetters(dayWeek) {

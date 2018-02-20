@@ -26,6 +26,7 @@
     "markUnread" : "Marcar como no leido",
     "undo" : "Deshacer",
 
+    "attachmentForwardAlert" : "Si quiere reenviar el adjunto que tenía el email, descárgelo y adjúntelo aquí",
     "confirmDeleteAccount" : "¿Estás seguro de querer eliminar el correo",
     "waitOnSend" : "Se debe esperar a que se adjunte el archivo",
     "noDestinatary" : "No ha escrito ningún destinatario",
@@ -33,6 +34,9 @@
     "emailSentTitle" : "Correo enviado",
     "emailSentText" : "Se ha enviado el email correctamente.",
 
+    "emptySearchResults" : "No se ha encontrado ningún correo",
+    "emptyFolder" : "Esta carpeta se encuentra vacía",
+    "waitingMessage" : "Esperando a Microsoft",
     "messageSent" : "Se ha enviado correctamente el correo",
     "openAttach" : "Abrir",
     "deattach" : "Desadjuntar",
